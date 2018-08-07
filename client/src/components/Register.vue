@@ -7,17 +7,20 @@
         </v-toolbar>
         <br>
         <div class="pl-4 pr-4 pt-2 pb-2">
-          <v-text-field
-            label="Email"
-            v-model="email"
-            outline
-          ></v-text-field>
-          <v-text-field
-            label="Password"
-            v-model="password"
-            :type="'password'"
-            outline
-          ></v-text-field>
+          <form name="tab-tracker-form">
+            <v-text-field
+              label="Email"
+              v-model="email"
+              outline
+            ></v-text-field>
+            <v-text-field
+              label="Password"
+              v-model="password"
+              type="password"
+              autocomplete="new-password"
+              outline
+            ></v-text-field>
+          </form>
           <v-btn dark flat class="cyan" @click="register">Register</v-btn>
         </div>
       </div>
@@ -29,7 +32,7 @@
 import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
-  data () {
+  data() {
     return {
       email: '',
       password: '',
@@ -37,12 +40,14 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async register() {
       try {
-        await AuthenticationService.register({
+        const response = await AuthenticationService.register({
           email: this.email,
           password: this.password
         })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }
