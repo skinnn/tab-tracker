@@ -5,7 +5,7 @@
 
       <main>
         <v-container fluid>
-          <router-view/>
+          <router-view />
         </v-container>
       </main>
     </v-app>
@@ -33,9 +33,14 @@ export default {
   margin-top: 60px;
 }
 
-html, body {
-  /* max-width: 100%; */
-  overflow: hidden;
+.danger-alert {
+  color: red;
+  background-color: pink;
 }
+
+/* html, body {
+  max-width: 100%;
+  overflow: hidden;
+} */
 
 </style>
