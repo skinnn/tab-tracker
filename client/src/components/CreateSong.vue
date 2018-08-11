@@ -54,21 +54,19 @@
       </v-flex>
       <v-flex xs8>
         <panel title="Song Structure" class="ml-3">
-          <v-text-field
+          <v-textarea
             required
             :rules="[required]"
             label="Tab"
             v-model="song.tab"
-            multi-line
-          ></v-text-field>
+          ></v-textarea>
 
-          <v-text-field
+          <v-textarea
             required
             :rules="[required]"
             label="Lyrics"
             v-model="song.lyrics"
-            multi-line
-          ></v-text-field>
+          ></v-textarea>
 
           <br>
           <div class="danger-alert" v-if="error">
@@ -83,7 +81,6 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
 import SongsService from '@/services/SongsService'
 
 export default {
@@ -102,9 +99,6 @@ export default {
       error: null,
       required: (value) => !!value || 'Required field.'
     }
-  },
-  components: {
-    Panel
   },
   methods: {
     async create() {

@@ -1,7 +1,7 @@
 <template>
-  <v-toolbar fixed class="cyan">
+  <v-toolbar fixed class="toolbar">
     <v-toolbar-title class="mr-4 home">
-      <router-link class="home-link" to="/">
+      <router-link to="/">
         TabTracker
       </router-link>
     </v-toolbar-title>
@@ -18,6 +18,10 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-items>
+      <!-- Logged in as -->
+        <v-btn v-if="$store.state.isUserLoggedIn" white>
+          {{this.$store.state.user.email}}
+        </v-btn>
       <!-- Register button -->
       <v-btn v-if="!$store.state.isUserLoggedIn" flat dark>
         <router-link to="/register">
@@ -45,7 +49,7 @@
         this.$store.dispatch('setToken', null)
         this.$store.dispatch('setUser', null)
         this.$router.push({
-          name: 'root'
+          name: 'songs'
         })
       }
     }
@@ -55,15 +59,15 @@
 <style scoped>
   a {
     text-decoration: none;
-    color: white;
+    color: cyan;
   }
 
   .home {
     cursor: pointer;
   }
 
-  .home-link:hover {
-    color: grey;
+  .toolbar {
+    background: #161616;
   }
 
 
